@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Make world different">
+    <meta name="keyword"  content="Reading Coding Running">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#60090">
+    <link rel="shortcut icon" href="/img/coffee.png">
+    <link rel="alternate" type="application/atom+xml" title="Huaizheng" href="/atom.xml">
+
+    <title>
+        
+          每周一博——术业有专攻｜Huaizheng&#39;s Blog
+        
+    </title>
+
+    <link rel="canonical" href="http://www.zhanghuaizheng.com/2012/11/10/每周一博——术业有专攻/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <link href="http://cdn.staticfile.org/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<style>
+
+    header.intro-header{
+        background-image: url('http://7vznmi.com1.z0.glb.clouddn.com/banner.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">
+                <span class="brand-logo">
+                    Huaizheng
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+                        
+                        <li>
+                            <a href="/reading/">Reading</a>
+                        </li>
+                        
+                    
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+    <!-- Main Content -->
+    
+<!-- Image to hack wechat -->
+<!--only post-->
+
+    
+        <img class="wechat-title-img" src="http://7vznmi.com1.z0.glb.clouddn.com/banner.jpg">
+    
+
+<style>
+
+    header.intro-header{
+        background-image: url('http://7vznmi.com1.z0.glb.clouddn.com/banner.jpg')
+    }
+
+</style>
+
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>每周一博——术业有专攻</h1>
+                    
+                    <span class="meta">
+                         author: Zhang Huaizheng
+                         <span>
+                          time: 2012-11-10
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#blog" title="blog">blog</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            每周一博——术业有专攻
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+                <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+
+                <p>老爸说我本周的每周一博有点流水账，略敷衍，仔细一读，就是如此，让一些活动搞的头昏脑胀而无法找到自己心灵的节奏，但是这个一搏必须持之以恒，于是就产生了一篇流水文章。<a id="more"></a></p>
+<p>这是很恐怖的。因为我写文章的目的就是仔细的记录观察这中国的大学生活，以防止自己在温水煮青蛙般的环境下偏离了航向。你看看，原来那篇文章就是典型的找不着北了，亡羊补牢，亡羊补牢吧。</p>
+<p>大学的活动多种多样，在前面几篇文章里其实都提过，而这些活动对每个人意味着什么其实对每个人都有不同的答案。就目前看来，在宏观的把握上，我对这些活动基本已经有了一个浅显的把握。</p>
+<p>先说学生会的活动，典型的一个微型社会，在里面能学到很多东西我不得不承认，与人打交道的能力绝对会与日俱增，开朗、活泼的孩子绝对能在期中得到自己的快乐（确实比较累但），可是，工科男女们，这个就不大适合了吧。你一个工程师，拿着学校开的主席证明但最基本的资格证没拿到出去找工作，这不坑爹吗？而经管啦、新闻啦，这个其实还是可以搞搞的，你本来就是跟人打交道的，闷在那里学习诚然很好，但这样提前开拓一下视野着实不错，打开了人脉，以后出去了也好混。实践中学习绝对会更深刻，很容易摸透那些潜规则。</p>
+<p>好的社团确实是个好地方，一大帮真正志同道合的人在一起做些自己爱干的事，想想就很有感觉（我的前提是靠谱的好的社团）。在这里面自己的兴趣是大家共同的兴趣，沉浸在兴趣中没人会觉得痛苦吧。而且还能学到一大部分自己得不到的技能，也真是不错的。但是有的社团确实坑爹，什么东西没有还浪费时间，这样的社团自己要有一定的鉴别力。而再好的社团中真正能得到一些极其优厚的福利，那你得用心的往上爬，有些社团后面的赞助商可不会把一些给力的机会给你这样的愣头青，如何取舍，还是因人而异。</p>
+<p>还有就是大批大批的活动了。学术的，文艺的，体育的等等。每个人估计现在的状态就是哪个都想参加，在痛苦的取舍中徘徊。没必要，真的没这些时间。一切为自己的终极目标服务，想当兢兢业业的技术帝大挑小挑那是必须的，想创业各种商业设计大赛随便有，想在众人面前展现自己好吧歌唱演讲那就拼命上吧······术业有专攻，每个人都与每个人的专业，只要你对自己的专业不反感，对自己想要干嘛有个初步的认识，那就一切为了专业服务，本末倒置的结果不用说也知道很痛苦。</p>
+<p>还有其实很多人出来之后得到的工作与自己的专业没啥关系，要是你真是一个这么有想法的人，那就太好了，随心所欲的发展，找到适合自己的方向，为之努力，在别的方面积累了磅礴的底蕴，也不错。</p>
+<p>以上分析不涵盖马冬晗那样的神牛，如果你是这样的人，那就当我没说（好好利用时间也不是不可能），下面就是我的混乱一周。</p>
+<p>其实这个周的主题仔细想想就是“舍 or 得”，舍弃了“川大好声音”主持人大赛，兢兢业业的准备思修老师给予极高期望的演讲大赛；舍弃了九把刀的见面会，在导师的指导下准备“凤鸣川大”歌手大赛的总决赛；舍弃了大量学习的时间，被扑面而来的活动搞得身心俱疲······</p>
+<p>歌手大赛。进总决赛之后：抽签、选合唱对手、选导师、准备舞美、准备个人宣传视频、准备亲友团视频、练歌。说实话，起初我真的是认为唱个歌就ok了，但确实没想到，其后续工作如此之繁重，但想想最后搭建舞台后站在上面风骚的场面，蛮值得。而因为导师只有晚上有空，作为学生只能按照他的时间来，周四idea承办的九把刀见面会就没去成，心里有些遗憾呢，那些年，我们一起错过的九把刀就这么在末日前最后一个光棍节上演了。其实这也给自己提了个醒，真要出去参加歌唱比赛，要做好万全的时间及精力准备，不然只能打酱油。</p>
+<p>演讲比赛。 我其实不是一个好的演说家，平时说话语速较快，一到台上立马变得悠然不已，平缓而没有感情，但是博学的思修老师他还就非得让我去给他挣个小脸。组建团队，正式开干，在这个过程中，我是深刻的感受到了双赢的奥秘：在此之前，舍友权峰并未真正做过PPT，将这件事拜托给他之后，他对这件事真是投入了大量的精力，PPT技术一日千里的猛进着，在比赛前的课上表演时惊艳全场，引得不少女生纷纷要求电话号码求学PPT知识，而现在他的PPT技术也远非我这个曾经做了不少PPT的人所能及的了。期间也出了不少小插曲，第一次做好后，因为下了种种破解类软件，电脑里病毒多的跟病毒库似的，权峰果断还原系统，奈何课件放了桌面上，并且也没备份，好吧，重新制作······然后在比赛前又发现一精美模板，又重做了一遍，三易其稿，现在的课件，真是美轮美奂的不可言说啊。演讲比赛很快就来了，被亚飞批评了无数遍的我到了台上还是没把我的毛病改掉，虽轻松晋级总决赛（有奖金），但其实全是声音的功劳，就我个人而言，其实我演讲的一塌糊涂，决赛能走多远，还得看技艺的提升，求指导······而在此期间，“川大好声音”主持人大赛如期举行，时间冲突，我又放弃了那个比赛，自嘲曰“三个决赛全出现一个人的身影，那场面到底多销魂啊”。演讲比赛总决赛也即将到来，两个活动双管齐下，不知道会怎样。但目前看来，时间精力略紧。</p>
+<p>最后谈学习。这每天看书时间被大量压缩得到的结果就是：上课混沌，下课迷茫，测验蛋疼，习题瞪眼。其实一定有办法平衡的，尤其是在自主时间这么充足的情况下。学霸马冬涵不就给我们树立了一个很好的例子（具体对她的看法我持保留意见）。读万卷书，行万里路，实践与知识，自我的潜力会充分发掘出来的，而且仔细一想，有大量的时间并未被利用，时间管理不行这个毛病愈显深刻。</p>
+<p>舍友路过，看到这个题目，悠然的说出一句：“挺好的，现在不疯狂，还有什么时间疯狂呢，不用纠结”，一语中的。再加上王凯同学说的“熬”字诀，就这样吧，大一，这些东西总会经历。而锐神所说的否定之否定，没有对要否定的东西有深刻的认识，便没有资格去评说它，不破不立。<br>大一上学期把这些东西该拿的不该拿的顺手拿一些，下学期是告别混乱的时刻吧。</p>
+<p>最近一直在读《扎拉图斯特拉如是说》，从未在一本书，在一个人身上找到如此多的共鸣，虽然大多数没懂，但尼采给了我一个醍醐灌顶的冲动。摘抄几句：“人类之所以伟大，是因为他是一座桥梁，而非目的：人类所以可爱，是因为它是一种过渡，一种堕落”，“你不得不在白天寻找十个真理；否则夜间还要为真理而寻觅，你的灵魂仍旧饥渴”“然而思想是一回事，行为又是一回事，行为的观念又是一回事。因果之轮不在他们之间转动”“用鲜血和箴言写作的人，不仅希望别人阅读，而且希望别人背诵”“我的蔑视和向往相互剧增；我攀登愈高，俞藐视攀登者。他在高处究竟意欲何为？”“倘若想拥有一个朋友，他就必须为朋友而战，为了战斗，他就必须拥有成为敌人的能力”还有好多不懂的，就不在此献丑了，品味一下，不错。</p>
+<p>最后再用两首《陈独秀传》里的诗自勉“人方厌狂士，世岂识清尘。且任鸾凤逝，高翔不可攀。”“幽幽道途上，白发污红尘。沧溟何辽阔，龙性岂易驯。”</p>
+
+
+                <hr>
+
+                
+                <!-- 多说 Share start -->
+                <div class="ds-share"
+                    style="text-align: right"
+                    data-thread-key="2012/11/10/每周一博——术业有专攻/"
+                    data-title="每周一博——术业有专攻"
+                    data-url="http://www.zhanghuaizheng.com/2012/11/10/每周一博——术业有专攻/"
+                    data-images=""
+                    data-content="老爸说我本周的每周一博有点流水账，略敷衍，仔细一读，就是如此，让一些活动搞的头昏脑胀而无法找到... | Huaizheng&#39;s Blog " >
+                    <div class="ds-share-inline">
+                      <ul  class="ds-share-icons-16">
+                        <li data-toggle="ds-share-icons-more"><a class="ds-more" href="#">分享到：</a></li>
+                        <li><a class="ds-wechat flat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+                        <li><a class="ds-weibo flat" href="javascript:void(0);" data-service="weibo">微博</a></li>
+                        <li><a class="ds-douban flat" href="javascript:void(0);" data-service="douban">豆瓣</a></li>
+                      </ul>
+                      <div class="ds-share-icons-more">
+                      </div>
+                    </div>
+                <hr>
+                </div>
+                <!-- 多说 Share end-->
+                
+
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2012/11/17/每周一博——我们这一代/" data-toggle="tooltip" data-placement="top" title="每周一博——我们这一代">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2012/11/03/每周一博——考试前后/" data-toggle="tooltip" data-placement="top" title="每周一博——考试前后">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                
+                <!-- 多说评论框 start -->
+                <div class="comment">
+                    <div class="ds-thread"
+                        data-thread-key="2012/11/10/每周一博——术业有专攻/"
+                        data-title="每周一博——术业有专攻"
+                        data-url="http://www.zhanghuaizheng.com/2012/11/10/每周一博——术业有专攻/" >
+                    </div>
+                </div>
+                <!-- 多说评论框 end -->
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col" >
+                <div class="toc-wrap">
+                    
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                <h5 class="text-center">
+                    <a href="/tags/">FEATURED TAGS</a>
+                </h5>
+                    <div class="tags">
+                        
+                          <a class="tag" href="/tags/#blog" title="blog">blog</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    // dynamic User by Hux
+    var _user = 'zhz';
+
+    // duoshuo comment query.
+    var duoshuoQuery = {short_name: _user };
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+<!-- 多说公共JS代码 end -->
+
+
+
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <span class="text-muted"style="font-size: 14px">双击导航条返回顶部</span>
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/zhzHNN">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/zhanghuaizheng">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/zhzhnn">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/zhanghuaizheng">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/HuaizhengZhang">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://www.linkedin.com/in/huaizheng">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Huaizheng 2016
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://www.zhanghuaizheng.com/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("http://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = '37b701031d64255bdae74dad83ccaddb';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','null','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <!--wechat title img-->
+    <img class="wechat-title-img" src="http://7vznmi.com1.z0.glb.clouddn.com/P50619-195123.jpg">
+</body>
+
+</html>
