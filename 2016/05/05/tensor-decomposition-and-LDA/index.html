@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Make world different">
+    <meta name="keyword"  content="Reading Coding Running">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#60090">
+    <link rel="shortcut icon" href="/img/coffee.png">
+    <link rel="alternate" type="application/atom+xml" title="Huaizheng" href="/atom.xml">
+
+    <title>
+        
+          tensor decomposition and LDA｜Huaizheng&#39;s Blog
+        
+    </title>
+
+    <link rel="canonical" href="http://www.zhanghuaizheng.com/2016/05/05/tensor-decomposition-and-LDA/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <link href="http://cdn.staticfile.org/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<style>
+
+    header.intro-header{
+        background-image: url('http://7vznmi.com1.z0.glb.clouddn.com/banner.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">
+                <span class="brand-logo">
+                    Huaizheng
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+                        
+                        <li>
+                            <a href="/reading/">Reading</a>
+                        </li>
+                        
+                    
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+    <!-- Main Content -->
+    
+<!-- Image to hack wechat -->
+<!--only post-->
+
+    
+        <img class="wechat-title-img" src="http://7vznmi.com1.z0.glb.clouddn.com/banner.jpg">
+    
+
+<style>
+
+    header.intro-header{
+        background-image: url('http://7vznmi.com1.z0.glb.clouddn.com/banner.jpg')
+    }
+
+</style>
+
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>tensor decomposition and LDA</h1>
+                    
+                    <span class="meta">
+                         author: Zhang Huaizheng
+                         <span>
+                          time: 2016-05-05
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#tensor" title="tensor">tensor</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            tensor decomposition and LDA
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+                <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+
+                <p>工作周记－2016年5月5日<br>本周自己的工作分成了三部分，1、在5.1期间进一步修改了自己的毕业设计，2、继续理顺SNTFM2的流程，并查阅相关文献对遗留下来的问题进行解决。3、查阅了LDA的相关资料，基本理解并推导了其过程。<a id="more"></a></p>
+<p>本周阅读了以下文献</p>
+<p>[1]Liu J, Liu J, Wonka P, et al. Sparse non-negative tensor factorization using columnwise coordinate descent[J]. Pattern Recognition, 2012, 45(1): 649-656.<br>[2] Wu F, Tan X, Yang Y, et al. Supervised nonnegative tensor factorization with maximum-margin constraint[C]//AAAI Conference on Artificial Intelligence. AAAI Press, 2013.<br>[3] Bordes A, Bottou L, Gallinari P, et al. Solving multiclass support vector machines with LaRank[C]//Proceedings of the 24th international conference on Machine learning. ACM, 2007: 89-96.<br>[4] Kim J, Park H. Fast nonnegative tensor factorization with an active-set-like method[M]//High-Performance Scientific Computing. Springer London, 2012: 311-326.<br>[5]《统计学习方法》，李航</p>
+<p>首先对于流程图稍微进行了修改，存于mac，还在维修中。对于这个“有监督的使用最大边缘限制的非负张量分解”，整体思路就是：对于展开后样本和标签一一对应的mode使用该论文提出的方式进行分解，得到之后预测分类用的拉格朗日参数及该mode对应的因子矩阵；对于其它mode，使用文献[1]的提供的方法进行分解，得到对应的因子矩阵。<br>遗留下来的问题如下。1、推导过程中核技巧的使用。2、完成推导后，应用算法过程中，对于参数以及因子矩阵的计算方式。3、其它mode所使用的分解算法。4、核心张量的构建。</p>
+<p>1、推导过程中核技巧的使用。通过文献[5]了解了核技巧的相关知识，而对于SNTFM2中的（5）到（7）的推导一直存在疑问：对于上面的多项式中w的替换，该算法引用了文献[3]中提供的算法，查阅该文献发现又是引用了其他的文献得出该结论，推导过程相对复杂。对于该结论，个人认为可以暂且记住，对于使用SVM时，如果需要使用，可直接应用，提高运算效率。为了更方便运算，作者做了如下规定，得到一个核心矩阵，显然此处不够严谨，该推导只适用于s mod，等式右边应该为。<br>整个推导对于拉格朗日对偶性应用的最多，通过文献[5]了解并推导了拉格朗日对偶性，主要是在于极大极小问题到极小极大问题的转换，并且推导出在何种情况下，原始问题和对偶问题的最优解一致。得到的定理：KKT条件是原始问题和对偶问题的最优解一致的充分必要条件。在阅读各类文献的过程中，该定理起到了极大的作用。</p>
+<p>2、完成推导后，应用算法过程中，对于参数以及因子矩阵的计算方式。计算只限于s mode下的求解。计算拉格朗日参数向量a和u(i)使用的共轭梯度法，克服了梯度下降法收敛慢的缺点，又避免了牛顿法需要存储和计算Hesse矩阵并求逆的缺点。此处引入了海森矩阵，但无需求逆，简化了计算过程。此处还参照文献[3]，将u(i)视作支持向量。并且对于核技巧中的核函数也进行了规定。</p>
+<p>3、其它mode所使用的分解算法。SNTFM2算法只考虑了在其中一个mode存在label的情况，其它mode的分解该算法视作不存在label可供使用，所以对于其它mode的分解，该文献直接使用了文献[1]中所得出的算法。SNTFM2给出了公式，文献[3]给出的公式，观察可知，两公式完全一致。对于该问题，虽然其为凸，但是却不可导。所以文献[3]使用次导数求解因子矩阵中的值，得到如下值，而已知非负性，所以第二个可以直接舍去。根据次导数的一些性质，若点m是全局最优点，则0必在f（m）次导数中，所以得出因子矩阵各点的最优值为：。上周的理解有误，并不是归一化的处理，就是利用这个公式求因子矩阵中每个元素的值。有了这个结果之后，文献[3]中的作者给出了极大加快分解速度的方式，就是可以以列为单位进行更新。SNTFM2算法应用了该算法，并且在进行一个分解速度的对比实验的时候得到了极其优秀的结果，分解速度显然高于NCP和Ntucker，但真正带来速度提高的应该是引用的文献[3]的算法。</p>
+<p>4、核心张量的构建。SNTFM2使用的构建核心张量的算法也来自于文献[3]。不过前者的第三条说要确保核心张量各个mode展开后得到的矩阵为满秩矩阵，后者要求为行满秩矩阵。但SNTFM2并未对此有详细说明，可以视作笔误吧。文献[3]给出了构建核心矩阵的完整算法，示意图如下：，相比于N X N X N这种平衡核心张量，利用该算法构建的不平衡张量在那些原本就极不平衡的原始张量的分解过程中，大大提高了分解速度，并且保证了正确率。SNTFM2只进行了平衡的核心张量的实验，个人认为在不平衡的张量分解中，还有很多文章可做。<br>从实验结果来看，应用该算法，对比SVM、1-Nearest Neighbor， Naïve Bayes，分类精度平均提高了2-3个百分点，但观察全部的实验数据，基本全部都是2阶矩阵，除了其中使用的一个面部图片数据集，但针对该数据集，也未说明如何构建的张量。<br>还有就是对于其中的惩罚参数的选取，只说明了调整参数，使其实验结果表现最好，选取惩罚参数的过程也有许多工作可以做，究竟是用了基因算法一类的方式还是其它方式。</p>
+
+
+                <hr>
+
+                
+                <!-- 多说 Share start -->
+                <div class="ds-share"
+                    style="text-align: right"
+                    data-thread-key="2016/05/05/tensor-decomposition-and-LDA/"
+                    data-title="tensor decomposition and LDA"
+                    data-url="http://www.zhanghuaizheng.com/2016/05/05/tensor-decomposition-and-LDA/"
+                    data-images=""
+                    data-content="工作周记－2016年5月5日本周自己的工作分成了三部分，1、在5.1期间进一步修改了自己的毕业... | Huaizheng&#39;s Blog " >
+                    <div class="ds-share-inline">
+                      <ul  class="ds-share-icons-16">
+                        <li data-toggle="ds-share-icons-more"><a class="ds-more" href="#">分享到：</a></li>
+                        <li><a class="ds-wechat flat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+                        <li><a class="ds-weibo flat" href="javascript:void(0);" data-service="weibo">微博</a></li>
+                        <li><a class="ds-douban flat" href="javascript:void(0);" data-service="douban">豆瓣</a></li>
+                      </ul>
+                      <div class="ds-share-icons-more">
+                      </div>
+                    </div>
+                <hr>
+                </div>
+                <!-- 多说 Share end-->
+                
+
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2016/07/04/张量分解与网络加速(1)/" data-toggle="tooltip" data-placement="top" title="张量分解与网络加速(1)">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2016/04/29/每周一博--五年/" data-toggle="tooltip" data-placement="top" title="每周一博--五年">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                
+                <!-- 多说评论框 start -->
+                <div class="comment">
+                    <div class="ds-thread"
+                        data-thread-key="2016/05/05/tensor-decomposition-and-LDA/"
+                        data-title="tensor decomposition and LDA"
+                        data-url="http://www.zhanghuaizheng.com/2016/05/05/tensor-decomposition-and-LDA/" >
+                    </div>
+                </div>
+                <!-- 多说评论框 end -->
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col" >
+                <div class="toc-wrap">
+                    
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                <h5 class="text-center">
+                    <a href="/tags/">FEATURED TAGS</a>
+                </h5>
+                    <div class="tags">
+                        
+                          <a class="tag" href="/tags/#tensor" title="tensor">tensor</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    // dynamic User by Hux
+    var _user = 'zhz';
+
+    // duoshuo comment query.
+    var duoshuoQuery = {short_name: _user };
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+<!-- 多说公共JS代码 end -->
+
+
+
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <span class="text-muted"style="font-size: 14px">双击导航条返回顶部</span>
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/zhzHNN">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/zhanghuaizheng">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/zhzhnn">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/zhanghuaizheng">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/HuaizhengZhang">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://www.linkedin.com/in/huaizheng">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Huaizheng 2016
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://www.zhanghuaizheng.com/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("http://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = '37b701031d64255bdae74dad83ccaddb';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','null','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <!--wechat title img-->
+    <img class="wechat-title-img" src="http://7vznmi.com1.z0.glb.clouddn.com/P50619-195123.jpg">
+</body>
+
+</html>

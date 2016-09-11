@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Make world different">
+    <meta name="keyword"  content="Reading Coding Running">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#60090">
+    <link rel="shortcut icon" href="/img/coffee.png">
+    <link rel="alternate" type="application/atom+xml" title="Huaizheng" href="/atom.xml">
+
+    <title>
+        
+          张量分解(3)｜Huaizheng&#39;s Blog
+        
+    </title>
+
+    <link rel="canonical" href="http://www.zhanghuaizheng.com/2016/04/27/张量分解(3)/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <link href="http://cdn.staticfile.org/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<style>
+
+    header.intro-header{
+        background-image: url('http://7vznmi.com1.z0.glb.clouddn.com/banner.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">
+                <span class="brand-logo">
+                    Huaizheng
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+                        
+                        <li>
+                            <a href="/reading/">Reading</a>
+                        </li>
+                        
+                    
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+    <!-- Main Content -->
+    
+<!-- Image to hack wechat -->
+<!--only post-->
+
+    
+        <img class="wechat-title-img" src="http://7vznmi.com1.z0.glb.clouddn.com/banner.jpg">
+    
+
+<style>
+
+    header.intro-header{
+        background-image: url('http://7vznmi.com1.z0.glb.clouddn.com/banner.jpg')
+    }
+
+</style>
+
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>张量分解(3)</h1>
+                    
+                    <span class="meta">
+                         author: Zhang Huaizheng
+                         <span>
+                          time: 2016-04-27
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#ML" title="ML">ML</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            张量分解(3)
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+                <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+
+                <p>本周继续扣非负张量分解文献，目标是5篇，目前阅读了4篇，有一些收获。<br><a id="more"></a></p>
+<p>本周阅读了以下文献。</p>
+<p>[1].Liu J, Liu J, Wonka P, et al. Sparse non-negative tensor factorization using columnwise coordinate descent[J]. Pattern Recognition, 2012, 45(1): 649-656.</p>
+<p>[2]Wu F, Tan X, Yang Y, et al. Supervised nonnegative tensor factorization with maximum-margin constraint[C]//AAAI Conference on Artificial Intelligence. AAAI Press, 2013.</p>
+<p>[3]Chen D, Plemmons R J. Nonnegativity constraints in numerical analysis[C]//Symposium on the Birth of Numerical Analysis. 2009: 109-140.</p>
+<p>[4]Kumar B G V, Kotsia I, Patras I. Max-margin non-negative matrix factorization[J]. Image and Vision Computing, 2012, 30(4): 279-291.</p>
+<p>对于[2]最大间隔限制的监督非负张量分解，一部分极大地参考了[1]中对于张量分解以列为单位进行梯度更新的处理方式，又是对[4]中最大间隔非负矩阵分解的推广。</p>
+<p>参考[4]中引入支持向量机的部分，对于[2]中对张量引入支持向量机有如下流程认识。</p>
+<p>(a).对于[2]中Eq.1公式，在进行分解的时候，一方面希望经验风险最小化，又要避免过拟合，便加入正则项，使结构风险最小化，能够在张量分解的低阶近似中取得较为好的结果</p>
+<p>(b).一般在处理的过程中，写成张量mode展开的形式，形如Eq.2然后又移动并分离目标函数，得到Eq.3，对于这块分解，如何转换成{ui,Y}的关系，感觉上对，但是理解不深刻，使用python提供的工具包，对于文章实验中的Pima数据进行了Tucker分解，有如下代码以及结果。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">import logging</div><div class="line">import numpy as np</div><div class="line">from sktensor import dtensor, tucker_hosvd, tucker_hooi</div><div class="line">import pandas as pd</div><div class="line"></div><div class="line">logging.basicConfig(level=logging.DEBUG)</div><div class="line"></div><div class="line">pima = np.loadtxt(&apos;pima.data&apos;, delimiter=&apos;,&apos;)</div><div class="line">T = dtensor(pima)</div><div class="line">Y = tucker_hosvd(T, 8)</div><div class="line">Z = tucker_hooi(T, [8, 8, 8], init=&apos;nvecs&apos;)</div><div class="line"></div><div class="line">f1 = open(&apos;hosvd.txt&apos;,&apos;w&apos;)</div><div class="line">f1.write(str(Y))</div><div class="line">f1.close()</div><div class="line"></div><div class="line">npY1 = np.array(Y[1])</div><div class="line">pdY1 = pd.DataFrame(npY1)</div><div class="line">pdY1.to_csv(&apos;hosvd_U.csv&apos;)</div><div class="line"></div><div class="line">f2 = open(&apos;hooi.txt&apos;,&apos;w&apos;)</div><div class="line">f2.write(str(Z))</div><div class="line">f2.close()</div><div class="line"></div><div class="line">npY2 = np.array(Z[1])</div><div class="line">pdY2 = pd.DataFrame(npY2)</div><div class="line">pdY2.to_csv(&apos;hooi_U.csv&apos;)</div></pre></td></tr></table></figure>
+<p>然后得到如下结果<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">(dtensor([[  5.14203910e+03,  -3.41060513e-13,   2.27373675e-13,</div><div class="line">         -5.68434189e-14,  -5.68434189e-13,  -4.54747351e-13,</div><div class="line">          0.00000000e+00,  -8.88178420e-15],</div><div class="line">       [  1.13686838e-12,   2.50273762e+03,  -1.13686838e-13,</div><div class="line">          5.68434189e-14,   1.98951966e-13,   2.27373675e-13,</div><div class="line">          2.84217094e-14,  -9.50350909e-14],</div><div class="line">       [ -1.98951966e-13,  -5.68434189e-14,  -6.12696642e+02,</div><div class="line">          4.90274488e-13,  -1.32871492e-12,  -1.42108547e-14,</div><div class="line">          7.46069873e-14,  -4.44089210e-15],</div><div class="line">       [  5.32907052e-14,  -2.84217094e-13,   4.54747351e-13,</div><div class="line">          3.90582213e+02,   6.90558721e-14,   5.68434189e-14,</div><div class="line">         -3.55271368e-15,  -4.45199433e-14],</div><div class="line">       [ -7.10542736e-15,   8.88178420e-14,  -7.56728014e-13,</div><div class="line">          2.97539771e-14,   2.98725106e+02,   1.26121336e-12,</div><div class="line">          4.97379915e-14,   8.99280650e-14],</div><div class="line">       [ -7.10542736e-14,  -1.77635684e-14,  -7.10542736e-14,</div><div class="line">         -6.39488462e-14,  -1.03028697e-12,   2.03529257e+02,</div><div class="line">         -1.37223566e-13,  -5.21839516e-14],</div><div class="line">       [  1.74971149e-13,  -8.70414851e-14,   4.32986980e-15,</div><div class="line">          6.97220059e-14,   3.55271368e-14,   3.59379193e-13,</div><div class="line">          7.75169653e+01,  -5.11257703e-14],</div><div class="line">       [ -8.46440973e-14,   1.21992694e-13,  -5.65103520e-14,</div><div class="line">         -4.25388891e-14,  -4.23550084e-14,   1.52112697e-13,</div><div class="line">         -4.49154602e-13,   1.18009404e+01]]),</div><div class="line"></div><div class="line">[array([[ 0.02594973, -0.04671973,  0.00878394, ..., -0.03738512,</div><div class="line">        -0.00603496,  0.04168196],</div><div class="line">       [ 0.01701292, -0.03073822, -0.03209308, ..., -0.0177168 ,</div><div class="line">        -0.03685088, -0.01310858],</div><div class="line">       [ 0.027982  , -0.05087339,  0.07336799, ..., -0.04154346,</div><div class="line">         0.05552154,  0.02850717],</div><div class="line">       ...,</div><div class="line">       [ 0.03599446, -0.00562436, -0.00573549, ..., -0.02669017,</div><div class="line">         0.01990307, -0.03281412],</div><div class="line">       [ 0.02150799, -0.03961211,  0.02388092, ...,  0.01601784,</div><div class="line">        -0.06588718,  0.0546566 ],</div><div class="line">       [ 0.01815169, -0.03264662, -0.0308107 , ..., -0.00652789,</div><div class="line">        -0.01922234, -0.01679858]]),</div><div class="line"></div><div class="line">array([[  1.81861607e-02,  -2.24711770e-02,   1.12218420e-02,</div><div class="line">         -4.89585429e-02,   1.44155609e-01,  -2.80747347e-02,</div><div class="line">          9.87127695e-01,  -2.33507351e-02],</div><div class="line">       [  6.18921698e-01,  -5.30898186e-01,  -5.44480583e-01,</div><div class="line">          1.00900405e-01,  -1.34711121e-01,  -1.01285495e-01,</div><div class="line">          4.40848944e-03,  -4.13889422e-03],</div><div class="line">       [  3.38750580e-01,  -3.30599213e-01,   7.52234765e-01,</div><div class="line">         -3.09630662e-01,  -3.07108672e-01,  -1.40972764e-01,</div><div class="line">          3.28680287e-03,   4.84767920e-03],</div><div class="line">       [  1.15286990e-01,  -2.90245226e-02,   3.23735712e-01,</div><div class="line">          8.72563637e-01,   2.00913746e-01,  -2.81639652e-01,</div><div class="line">         -5.27907677e-04,  -6.48941682e-04],</div><div class="line">       [  6.61896903e-01,   7.46743279e-01,   8.80418586e-03,</div><div class="line">         -6.32511096e-02,   5.90541754e-03,   1.23574640e-02,</div><div class="line">          1.05642825e-03,  -9.73351077e-05],</div><div class="line">       [  1.57603465e-01,  -1.40835458e-01,   1.58803831e-01,</div><div class="line">          2.00151470e-01,   8.13684005e-02,   9.39733285e-01,</div><div class="line">          1.67754914e-02,  -5.29692334e-03],</div><div class="line">       [  2.41574946e-03,  -1.69274406e-03,   1.14592099e-03,</div><div class="line">          2.85445717e-03,   2.28354723e-03,   3.72702750e-03,</div><div class="line">         -7.42809456e-03,   1.30914660e-01],</div><div class="line">       [  1.60019269e-01,  -1.73316364e-01,   8.62108381e-02,</div><div class="line">         -2.93444242e-01,   9.05379270e-01,  -8.04840518e-02,</div><div class="line">         -1.56892196e-01,   4.60732999e-04],</div><div class="line">       [  1.94557562e-03,  -1.52368467e-03,  -4.81869109e-03,</div><div class="line">          2.17657793e-03,   4.18049389e-03,   3.98947613e-03,</div><div class="line">          2.44034106e-02,   9.91083631e-01]])])</div></pre></td></tr></table></figure></p>
+<p>Pima数据集共8列，768行，每条数据7个特征对应{0，1}，按照普通的处理，这显然是一个矩阵分解，对于此例，分解成两个因子矩阵,第一个因子矩阵为768X8，第二个矩阵为9X8，核心张量取8X8，<strong>此处的疑惑，就是如何将该数据集构建成一个合适的张量.</strong>。同时构建核心张量也没有实现文中借鉴[1]的构建方式。</p>
+<p>(c).支持向量机的学习策略就是间隔最大化，可形式化为一个求解凸二次规划问题，也等价于正则化的合页损失函数的最小化问题。对于损失项的选取，我们希望分解的尽可能准确，又希望可以帮助分解，所以将特征点尽可能分开，便将Eq.3中的损失函数替换为&lt;&lt;统计学习方法&gt;&gt;P114中的支持向量机最优化问题，又可以将其继续替换成其等价形式：合页损失函数与L2范数之和，便得到文中的Eq.4公式，此时，我们在进行分解的过程中，又在不断的优化支持向量机，得到的最终的因子矩阵的同时，便能够得到较好的分类决策函数，实现了最初的目标。</p>
+<p>(d).之后，一般转换为对偶问题求解，显然问题并不是一个线性可分，而是一个非线性支持向量机，便利用核技巧进行转换，求得参数a便得到了最终决策函数，便可以利用其进行分类。</p>
+<p>文献[3]是偏综述的一篇文献。第一部分讲述了多种非负最小二乘法的算法。整体上分为两种方式active－set method和迭代方式<br>第二部分讲述非负矩阵分解以及非负张量分解，对于张量分解只阐述了cp分解，但是给了很好地启发。第三部分讲述非负限制的一些应用算法，例如对于svm的提升，图像处理，文本挖掘等等。在图像处理中，图片修复应用非负限制分解特别多。最后实际给了一个例子。混合应用nmf和ntf对遥感图像进行数据压缩和甄别。文章对于非负这一限制给出了很多算法以及应用，可以帮助后面进行拓展，帮助理解</p>
+<p>接下来会阅读一下Fast Nonnegative Tensor Factorization with an Active-Set-Like Method这篇文章，继续理解文献[2]</p>
+
+
+                <hr>
+
+                
+                <!-- 多说 Share start -->
+                <div class="ds-share"
+                    style="text-align: right"
+                    data-thread-key="2016/04/27/张量分解(3)/"
+                    data-title="张量分解(3)"
+                    data-url="http://www.zhanghuaizheng.com/2016/04/27/张量分解(3)/"
+                    data-images=""
+                    data-content="本周继续扣非负张量分解文献，目标是5篇，目前阅读了4篇，有一些收获。
+本周阅读了以下文献。
+[... | Huaizheng&#39;s Blog " >
+                    <div class="ds-share-inline">
+                      <ul  class="ds-share-icons-16">
+                        <li data-toggle="ds-share-icons-more"><a class="ds-more" href="#">分享到：</a></li>
+                        <li><a class="ds-wechat flat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+                        <li><a class="ds-weibo flat" href="javascript:void(0);" data-service="weibo">微博</a></li>
+                        <li><a class="ds-douban flat" href="javascript:void(0);" data-service="douban">豆瓣</a></li>
+                      </ul>
+                      <div class="ds-share-icons-more">
+                      </div>
+                    </div>
+                <hr>
+                </div>
+                <!-- 多说 Share end-->
+                
+
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2016/04/29/每周一博--五年/" data-toggle="tooltip" data-placement="top" title="每周一博--五年">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2016/04/21/张量分解(2)/" data-toggle="tooltip" data-placement="top" title="张量分解(2)">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                
+                <!-- 多说评论框 start -->
+                <div class="comment">
+                    <div class="ds-thread"
+                        data-thread-key="2016/04/27/张量分解(3)/"
+                        data-title="张量分解(3)"
+                        data-url="http://www.zhanghuaizheng.com/2016/04/27/张量分解(3)/" >
+                    </div>
+                </div>
+                <!-- 多说评论框 end -->
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col" >
+                <div class="toc-wrap">
+                    
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                <h5 class="text-center">
+                    <a href="/tags/">FEATURED TAGS</a>
+                </h5>
+                    <div class="tags">
+                        
+                          <a class="tag" href="/tags/#ML" title="ML">ML</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    // dynamic User by Hux
+    var _user = 'zhz';
+
+    // duoshuo comment query.
+    var duoshuoQuery = {short_name: _user };
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+<!-- 多说公共JS代码 end -->
+
+
+
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <span class="text-muted"style="font-size: 14px">双击导航条返回顶部</span>
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/zhzHNN">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/zhanghuaizheng">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/zhzhnn">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/zhanghuaizheng">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/HuaizhengZhang">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://www.linkedin.com/in/huaizheng">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Huaizheng 2016
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://www.zhanghuaizheng.com/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("http://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    var _baId = '37b701031d64255bdae74dad83ccaddb';
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?" + _baId;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','null','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <!--wechat title img-->
+    <img class="wechat-title-img" src="http://7vznmi.com1.z0.glb.clouddn.com/P50619-195123.jpg">
+</body>
+
+</html>
