@@ -199,12 +199,11 @@
                 <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
 
-                <p>参考文献：<br>[1]Jaderberg, Max, Karen Simonyan, and Andrew Zisserman. “Spatial transformer networks.” Advances in Neural Information Processing Systems. 2015.</p>
+                <h2 id="参考文献："><a href="#参考文献：" class="headerlink" title="参考文献："></a>参考文献：</h2><p>[1]Jaderberg, Max, Karen Simonyan, and Andrew Zisserman. “Spatial transformer networks.” Advances in Neural Information Processing Systems. 2015.</p>
 <p>[2]Jaderberg, Max, Andrea Vedaldi, and Andrew Zisserman. “Speeding up convolutional neural networks with low rank expansions.” arXiv preprint arXiv:1405.3866 (2014).<a id="more"></a></p>
 <p>[3]Zhang X, Zou J, He K, et al. “Accelerating very deep convolutional networks for classification and detection”[J]. 2015.</p>
 <p>[4]Lebedev, Vadim, et al. “Speeding-up convolutional neural networks using fine-tuned cp-decomposition.” arXiv preprint arXiv:1412.6553 (2014).</p>
-<p>目前工作进展</p>
-<p>主要读了[2][3][4]，文献[2]在2014年的时候就提出了可以采用低秩近似的方法对于CNN进行加速，在文献[2]中，主要是对过滤器进行了降维，取得了4倍左右的加速。</p>
+<h2 id="目前工作进展"><a href="#目前工作进展" class="headerlink" title="目前工作进展"></a>目前工作进展</h2><p>主要读了[2][3][4]，文献[2]在2014年的时候就提出了可以采用低秩近似的方法对于CNN进行加速，在文献[2]中，主要是对过滤器进行了降维，取得了4倍左右的加速。</p>
 <p>文献[3]根据文献[2]，提出[2]在较深层的神经网络中效果不好，部分采用了[2]的方法，但进行了大量对比优化，提出了SVD的方法来对卷积层进行分解，文献[3]提出，目前对于神经网络的加速方式主要聚集在分解和优化这两方面，[3]同时进行了分解和优化，并提出之前的工作多是对于1-2层CNN进行分解优化，对于较深层的CNN，每一层的错误会逐渐累积，导致精度严重下降，所以对于深层的CNN，文献[3]构建出一个不对称的网络结构，并且通过合理的设置每一层的通道d的数值，使错误率大幅度降低，在深层CNN中也获得了4倍左右的加速，与文献[2]在浅层CNN的加速数值基本接近。</p>
 <p>文献[4]题目《Speeding-up convolutional neural networks using fine-tuned cp-decomposition》就明确说明了是用CP分解的方式进行加速，也是参考了[2]。</p>
 <p>使用CP分解将任一层卷积层进行张量分解，对于网络整体，使用BP进行求解。</p>
@@ -269,7 +268,7 @@
 
             <div class="hidden-xs col-sm-3 toc-col" >
                 <div class="toc-wrap">
-                    
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文献："><span class="toc-text">参考文献：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#目前工作进展"><span class="toc-text">目前工作进展</span></a></li></ol>
                 </div>
             </div>
         </div>
@@ -412,6 +411,7 @@
                     <br>
                     <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
                     <br>
+                    Theme by <a href="https://haojen.github.io/">Haojen Ma</a>
                 </p>
 
             </div>
