@@ -19,7 +19,9 @@ News
 
 Organize a Deep Learning for (MDT) multiple data types workshop with NVIDIA at Nanyang Technological University!
 
-One paper is accepted by *ICDM 2018* as long paper!
+One paper is accepted by **ICDM 2018** as FULL paper (8.86% acceptance)!
+
+One paper is accepted by **ICME 2018** as oral presentaion (15% acceptance)
 
 
 
