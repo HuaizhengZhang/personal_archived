@@ -11,7 +11,7 @@ redirect_from:
 
 Education
 ======
-* B.S. in Computer Science, Sichuan University, 2012
+* B.S. in Computer Science, Sichuan University, 2016
 
 * Ph.D in Computer Science, Nanyang Technological University, Singapore, 2021 (expected)
 
