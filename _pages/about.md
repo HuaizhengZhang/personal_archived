@@ -10,4 +10,14 @@ redirect_from:
 
 Welcome to Huaizheng's homepage
 
-Lorem ipsum.
+I am a third-year Ph.D. student in NTU, Singapore. I enjoy applying deep learning in practice. 
+I started my research from Computer Vision, and then I did some NLP research. I love both of them.
+Currently, I focus on deep learning video analysis system.
+
+-News
+-======
+
+Organize a Deep Learning workshop with NVIDIA at Nanyang Technological University!
+
+One paper is accepted by ICDM 2018 as long paper!
+
