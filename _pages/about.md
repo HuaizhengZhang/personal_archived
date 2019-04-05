@@ -8,7 +8,7 @@ redirect_from:
   - /about.html
 ---
 
-Welcome to Huaizheng's homepage
+Welcome to Huaizheng's homepage (*Under construction*)
 
 I am a third-year Ph.D. student in NTU, Singapore. I enjoy applying deep learning in practice. 
 I started my research from Computer Vision, and then I did some NLP research. I love both of them.
