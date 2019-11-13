@@ -17,6 +17,8 @@ Currently, I focus on machine learning system.
 News
 -======
 
+Join **ByteDance AI Lab** as an AI system research intern.
+
 One paper is accepted by **CIKM 2019** !
 
 One paper is accepted by **ICC 2019** !
